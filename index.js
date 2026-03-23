@@ -5,9 +5,7 @@ import { Server } from "socket.io";
 const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
-  cors: {
-    origin: "*",
-  }
+  cors: { origin: "*" }
 });
 
 app.get("/", (req, res) => {
@@ -15,10 +13,10 @@ app.get("/", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  console.log("A player connected:", socket.id);
+  console.log("Player connected:", socket.id);
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 httpServer.listen(PORT, () => {
   console.log(Server is running on port ${PORT});
 });
