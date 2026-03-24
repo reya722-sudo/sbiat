@@ -1,32 +1,32 @@
-import express from "express";
-import { createServer } from "http";
-import { Server } from "socket.io";
+const express = require('express');
+const http = require('http');
+const { Server } = require('socket.io');
 
 const app = express();
-const httpServer = createServer(app);
-const io = new Server(httpServer, {
-  cors: {
-    origin: "*",
-    methods: ["GET", "POST"]
-  }
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: { origin: "*" }
 });
 
-// صفحة تجريبية للتأكد أن السيرفر يعمل
-app.get("/", (req, res) => {
-  res.send("<h1>Sbiat Server is Running!</h1>");
-});
+io.on('connection', (socket) => {
+  console.log('لاعب متصل:', socket.id);
 
-// منطق الاتصال باللاعبين
-io.on("connection", (socket) => {
-  console.log("Player connected:", socket.id);
-  
-  socket.on("disconnect", () => {
-    console.log("Player disconnected:", socket.id);
+  socket.on('start_game', () => {
+    // توزيع ورق عشوائي كمثال من السيرفر
+    const hand = ["A♠", "K♥", "Q♦", "J♣"];
+    socket.emit('receive_hand', hand);
+  });
+
+  socket.on('send_message', (msg) => {
+    io.emit('new_message', {
+      id: Math.random(),
+      sender: "لاعب",
+      text: msg,
+      time: new Date().toLocaleTimeString()
+    });
   });
 });
 
-// تحديد المنفذ (Port) بشكل تلقائي ليتناسب مع Render
-const PORT = process.env.PORT || 10000;
-httpServer.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+server.listen(process.env.PORT || 3000, () => {
+  console.log('السيرفر يعمل الآن...');
 });
