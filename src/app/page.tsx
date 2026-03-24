@@ -131,6 +131,6 @@ export default function SbiatGame() {
           </div>
         </div>
       </footer>
-    </div>
+    </div> 
   );
 }
