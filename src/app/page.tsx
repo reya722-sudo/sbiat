@@ -5,28 +5,72 @@ export default function GamePage() {
   const [room, setRoom] = useState("");
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white flex flex-col items-center justify-center p-4">
-      <div className="bg-slate-800 p-8 rounded-2xl shadow-2xl border border-slate-700 w-full max-screen-sm text-center">
-        <h1 className="text-4xl font-bold mb-6 text-yellow-500">لعبة السبيطة</h1>
+    <div style={{ 
+      minHeight: '100vh', 
+      backgroundColor: '#0f172a', 
+      color: 'white', 
+      display: 'flex', 
+      flexDirection: 'column', 
+      alignItems: 'center', 
+      justifyContent: 'center', 
+      fontFamily: 'sans-serif',
+      direction: 'rtl' 
+    }}>
+      <div style={{ 
+        backgroundColor: '#1e293b', 
+        padding: '2rem', 
+        borderRadius: '1rem', 
+        textAlign: 'center', 
+        boxShadow: '0 10px 25px rgba(0,0,0,0.5)',
+        width: '90%',
+        maxWidth: '400px'
+      }}>
+        <h1 style={{ color: '#eab308', fontSize: '2.5rem', marginBottom: '1.5rem' }}>لعبة السبيطة</h1>
         
-        <div className="space-y-4">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <input 
             type="text" 
             placeholder="أدخل رقم الغرفة"
-            className="w-full p-3 rounded-lg bg-slate-700 border border-slate-600 text-white text-center focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            style={{ 
+              width: '100%', 
+              padding: '12px', 
+              borderRadius: '8px', 
+              border: '1px solid #475569', 
+              backgroundColor: '#334155', 
+              color: 'white', 
+              textAlign: 'center' 
+            }}
             value={room}
             onChange={(e) => setRoom(e.target.value)}
           />
           
           <button 
-            className="w-full bg-yellow-600 hover:bg-yellow-500 text-white font-bold py-3 rounded-lg transition-all shadow-lg active:scale-95"
+            style={{ 
+              width: '100%', 
+              padding: '12px', 
+              borderRadius: '8px', 
+              backgroundColor: '#ca8a04', 
+              color: 'white', 
+              border: 'none', 
+              fontWeight: 'bold', 
+              cursor: 'pointer' 
+            }}
             onClick={() => alert(`جاري الدخول للغرفة: ${room}`)}
           >
             دخول الغرفة
           </button>
           
           <button 
-            className="w-full bg-slate-600 hover:bg-slate-500 text-white font-bold py-3 rounded-lg transition-all shadow-lg active:scale-95"
+            style={{ 
+              width: '100%', 
+              padding: '12px', 
+              borderRadius: '8px', 
+              backgroundColor: '#475569', 
+              color: 'white', 
+              border: 'none', 
+              fontWeight: 'bold', 
+              cursor: 'pointer' 
+            }}
           >
             إنشاء غرفة جديدة
           </button>
